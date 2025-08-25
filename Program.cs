@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-/*using System;
+/*    QUESTION 1
+using System;
 
 class SmartMeterBill
 {
@@ -40,7 +41,11 @@ class SmartMeterBill
 */
 
 
-/*using System;
+
+
+/*   QUESTION 2
+
+using System;
 
 class Customer
 {
@@ -86,6 +91,9 @@ class Program
 }
 */
 
+
+
+/*     QUESTION 3
 using System;
 
 class SmartMeterStatistics
@@ -131,6 +139,8 @@ class SmartMeterStatistics
         stats.CalculateStatistics(weeklyUnits);
     }
 }
+*/
+
 
 
 
