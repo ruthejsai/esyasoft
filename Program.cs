@@ -35,7 +35,7 @@ class SmartMeterBill
 
         totalBill = Math.Abs(totalBill);
 
-        Console.WriteLine("Total electricity bill: $" + totalBill);
+        Console.WriteLine("Total electricity bill: " + totalBill);
     }
 }
 */
@@ -140,6 +140,7 @@ class SmartMeterStatistics
     }
 }
 */
+
 
 
 
