@@ -67,7 +67,7 @@ class Customer
 
         Console.WriteLine($"Customer: {Name} (ID: {CustomerID})");
         Console.WriteLine($"Units Consumed: {UnitsConsumed}");
-        Console.WriteLine($"Total Bill: ${totalBill}");
+        Console.WriteLine($"Total Bill: {totalBill}");
     }
 }
 
@@ -120,7 +120,7 @@ class SmartMeterStatistics
         double average = (double)total / units.Length;
 
         Console.WriteLine($"Total units: {total}");
-        Console.WriteLine($"Average units/day: {average:F2}");
+        Console.WriteLine($"Average units/day: {average}");
         Console.WriteLine($"Highest consumption: {((Days)maxIndex)} ({maxUnits} units)");
     }
 
@@ -140,6 +140,7 @@ class SmartMeterStatistics
     }
 }
 */
+
 
 
 
