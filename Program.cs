@@ -201,6 +201,7 @@ class Program
 
         resMeter.PrintDetails();  
         comMeter.PrintDetails();  
+        Console.ReadLine();
     }
 }
 
@@ -244,6 +245,7 @@ class Program
         account.Recharge(500);   
         account.Consume(200);    
         account.Consume(400);    
+        Console.ReadLine();
     }
 }
 
@@ -299,9 +301,11 @@ class Program
 
         res.CalculateBill();  
         com.CalculateBill();  
+        Console.ReadLine();
     }
 }
 */
+
 
 
 
