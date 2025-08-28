@@ -145,8 +145,8 @@ class SmartMeterStatistics
 /*    QUESTION 4
 class SmartMeter
 {
-    public int MeterId { get; set; }
-    public string CustomerName { get; set; }
+    public int MeterId;
+    public string CustomerName;
 
     public SmartMeter(int meterId, string customerName)
     {
@@ -162,7 +162,7 @@ class SmartMeter
 
 class ResidentialMeter : SmartMeter
 {
-    public string HouseType { get; set; }
+    public string HouseType;
 
     public ResidentialMeter(int meterId, string customerName, string houseType)
         : base(meterId, customerName)
@@ -178,7 +178,7 @@ class ResidentialMeter : SmartMeter
 
 class CommercialMeter : SmartMeter
 {
-    public string BusinessType { get; set; }
+    public string BusinessType;
 
     public CommercialMeter(int meterId, string customerName, string businessType)
         : base(meterId, customerName)
@@ -305,6 +305,7 @@ class Program
     }
 }
 */
+
 
 
 
