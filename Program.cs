@@ -142,6 +142,167 @@ class SmartMeterStatistics
 */
 
 
+/*    QUESTION 4
+class SmartMeter
+{
+    public int MeterId { get; set; }
+    public string CustomerName { get; set; }
+
+    public SmartMeter(int meterId, string customerName)
+    {
+        MeterId = meterId;
+        CustomerName = customerName;
+    }
+
+    public virtual void PrintDetails()
+    {
+        Console.WriteLine($"Meter -> ID: {MeterId}, Name: {CustomerName}");
+    }
+}
+
+class ResidentialMeter : SmartMeter
+{
+    public string HouseType { get; set; }
+
+    public ResidentialMeter(int meterId, string customerName, string houseType)
+        : base(meterId, customerName)
+    {
+        HouseType = houseType;
+    }
+
+    public override void PrintDetails()
+    {
+        Console.WriteLine($"Residential Meter -> ID: {MeterId}, Name: {CustomerName}, HouseType: {HouseType}");
+    }
+}
+
+class CommercialMeter : SmartMeter
+{
+    public string BusinessType { get; set; }
+
+    public CommercialMeter(int meterId, string customerName, string businessType)
+        : base(meterId, customerName)
+    {
+        BusinessType = businessType;
+    }
+
+    public override void PrintDetails()
+    {
+        Console.WriteLine($"Commercial Meter -> ID: {MeterId}, Name: {CustomerName}, BusinessType: {BusinessType}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        SmartMeter resMeter = new ResidentialMeter(201, "Alice", "Apartment");
+        SmartMeter comMeter = new CommercialMeter(301, "Bob", "Shop");
+
+        resMeter.PrintDetails();  
+        comMeter.PrintDetails();  
+    }
+}
+
+*/
+
+
+
+/*    QUESTION 5
+using System;
+
+class SmartMeterAccount
+{
+    private decimal balance; 
+
+    public void Recharge(decimal amount)
+    {
+        balance += amount;
+        Console.WriteLine($"Balance after recharge: {balance}");
+    }
+
+    public void Consume(decimal amount)
+    {
+        if (amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine($"Balance after consumption: {balance}");
+        }
+        else
+        {
+            Console.WriteLine("Insufficient balance");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        SmartMeterAccount account = new SmartMeterAccount();
+
+        account.Recharge(500);   
+        account.Consume(200);    
+        account.Consume(400);    
+    }
+}
+
+*/
+
+
+
+
+/*   QUESTION 6
+
+using System;
+
+abstract class MeterReading
+{
+    public int Units { get; set; }
+
+    public MeterReading(int units)
+    {
+        Units = units;
+    }
+
+    public abstract void CalculateBill();
+}
+
+class ResidentialReading : MeterReading
+{
+    public ResidentialReading(int units) : base(units) { }
+
+    public override void CalculateBill()
+    {
+        int bill = Units * 5;
+        Console.WriteLine($"Residential Bill = {bill}");
+    }
+}
+
+class CommercialReading : MeterReading
+{
+    public CommercialReading(int units) : base(units) { }
+
+    public override void CalculateBill()
+    {
+        int bill = Units * 8;
+        Console.WriteLine($"Commercial Bill = {bill}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        MeterReading res = new ResidentialReading(100);
+        MeterReading com = new CommercialReading(100);
+
+        res.CalculateBill();  
+        com.CalculateBill();  
+    }
+}
+*/
+
 
 
 
