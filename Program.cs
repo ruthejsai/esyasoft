@@ -308,8 +308,233 @@ class Program
 
 
 
+/*   QUESTION 7
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<List<int>> meterReadings = new List<List<int>>()
+        {
+            new List<int>{10, 15, 20},  
+            new List<int>{12, 18, 22},  
+            new List<int>{14, 19, 25},  
+            new List<int>{11, 16, 21},  
+            new List<int>{13, 20, 24},  
+            new List<int>{15, 22, 28},  
+            new List<int>{17, 25, 30}   
+        };
+
+        Dictionary<string, Dictionary<string, List<int>>> areaData =
+            new Dictionary<string, Dictionary<string, List<int>>>()
+        {
+            {
+                "Area1", new Dictionary<string, List<int>>()
+                {
+                    { "House101", new List<int>{10, 12, 14, 11, 13, 15, 17} },
+                    { "House102", new List<int>{8, 9, 10, 11, 12, 13, 14} }
+                }
+            },
+            {
+                "Area2", new Dictionary<string, List<int>>()
+                {
+                    { "House201", new List<int>{20, 22, 25, 21, 23, 26, 28} },
+                    { "House202", new List<int>{15, 18, 20, 22, 25, 27, 30} }
+                }
+            }
+        };
+
+        Dictionary<string, List<string>> metersInArea = new Dictionary<string, List<string>>()
+        {
+            { "Area1", new List<string>{ "MeterA1", "MeterA2", "MeterA3" } },
+            { "Area2", new List<string>{ "MeterB1", "MeterB2" } }
+        };
+
+        List<Dictionary<string, string>> complaints = new List<Dictionary<string, string>>()
+        {
+            new Dictionary<string, string>()
+            {
+                { "HouseNum", "House101" },
+                { "MeterNum", "MeterA1" },
+                { "Issue", "Low Voltage" },
+                { "Date", "2025-08-25" }
+            },
+            new Dictionary<string, string>()
+            {
+                { "HouseNum", "House202" },
+                { "MeterNum", "MeterB2" },
+                { "Issue", "Meter Not Working" },
+                { "Date", "2025-08-26" }
+            },
+            new Dictionary<string, string>()
+            {
+                { "HouseNum", "House102" },
+                { "MeterNum", "MeterA2" },
+                { "Issue", "High Bill" },
+                { "Date", "2025-08-27" }
+            }
+        };
 
 
+        Console.WriteLine("Night reading of Day 3: " + meterReadings[2][2]);
+
+        string house = "House201";
+        Console.WriteLine($"Readings of {house}: " + string.Join(", ", areaData["Area2"][house]));
+
+        string area = "Area1";
+        Console.WriteLine($"Meters in {area}: " + string.Join(", ", metersInArea[area]));
+
+        Console.WriteLine("\nComplaints List:");
+        foreach (var c in complaints)
+        {
+            Console.WriteLine($"House: {c["HouseNum"]}, Meter: {c["MeterNum"]}, Issue: {c["Issue"]}, Date: {c["Date"]}");
+        }
+    }
+}
+*/
+
+
+
+
+/*   QUESTION 8
+using System;
+using System.Collections.Generic;
+
+enum MeterStatus { Active, Inactive, Fault }
+
+struct Reading
+{
+    public DateTime Date;
+    public int Units;
+
+    public Reading(DateTime date, int units)
+    {
+        Date = date;
+        Units = units;
+    }
+
+    public override string ToString()
+    {
+        return $"{Date.ToShortDateString()} - {Units} units";
+    }
+}
+
+abstract class Notifier
+{
+    public abstract void SendMessage(string msg);
+}
+
+class SmsNotifier : Notifier
+{
+    private string phone;
+    public SmsNotifier(string phone) { this.phone = phone; }
+    public override void SendMessage(string msg)
+    {
+        Console.WriteLine($"[SMS to {phone}] {msg}");
+    }
+}
+
+class EmailNotifier : Notifier
+{
+    private string email;
+    public EmailNotifier(string email) { this.email = email; }
+    public override void SendMessage(string msg)
+    {
+        Console.WriteLine($"[Email to {email}] {msg}");
+    }
+}
+
+static class Tariff
+{
+    public static double RatePerUnit = 5.0; // ₹5 per unit
+}
+
+sealed class BillCalculator
+{
+    public double GenerateBill(List<Reading> readings)
+    {
+        int totalUnits = 0;
+        foreach (var r in readings)
+            totalUnits += r.Units;
+
+        return totalUnits * Tariff.RatePerUnit;
+    }
+}
+
+partial class Customer
+{
+    public string Name { get; set; }
+    public string? Email { get; set; } 
+}
+
+partial class Customer
+{
+    public string? Phone { get; set; }
+
+    public Notifier GetNotifier()
+    {
+        if (!string.IsNullOrEmpty(Email))
+            return new EmailNotifier(Email!);
+        else
+            return new SmsNotifier(Phone ?? "Unknown");
+    }
+}
+
+class Meter
+{
+    public int MeterId { get; set; }
+    public MeterStatus Status { get; set; }
+
+    public event Action<Reading>? OnReadingAdded;
+
+    public ReadingHistory History { get; private set; }
+
+    public Meter(int meterId)
+    {
+        MeterId = meterId;
+        Status = MeterStatus.Active;
+        History = new ReadingHistory();
+    }
+
+    public void AddReading(Reading r)
+    {
+        History.Readings.Add(r);
+        OnReadingAdded?.Invoke(r);
+    }
+
+    public class ReadingHistory
+    {
+        public List<Reading> Readings { get; set; } = new List<Reading>();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Customer cust1 = new Customer { Name = "Ravi", Phone = "9876543210", Email = null };
+        Notifier notifier = cust1.GetNotifier();
+
+        Meter meter = new Meter(101);
+
+        meter.OnReadingAdded += (reading) =>
+        {
+            notifier.SendMessage($"New Reading Added: {reading.Units} units on {reading.Date.ToShortDateString()}");
+        };
+
+        meter.AddReading(new Reading(DateTime.Now.AddDays(-2), 50));
+        meter.AddReading(new Reading(DateTime.Now.AddDays(-1), 60));
+        meter.AddReading(new Reading(DateTime.Now, 70));
+
+        BillCalculator billCalc = new BillCalculator();
+        double billAmount = billCalc.GenerateBill(meter.History.Readings);
+
+        Console.WriteLine($"\nBill for Customer {cust1.Name}: {billAmount}");
+    }
+}
+*/
 
 
 
