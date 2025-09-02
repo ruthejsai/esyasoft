@@ -537,4 +537,59 @@ class Program
 */
 
 
+/*    QUESTION 9
+using System;
+using System.IO;
+
+class FileHandlingExample
+{
+    static void Main()
+    {
+        string fileName = "favorites.txt";
+        using (StreamWriter writer = new StreamWriter(fileName))
+        {
+            Console.WriteLine("Enter 5 favorite colors:");
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.Write($"Color {i}: ");
+                string color = Console.ReadLine();
+                writer.WriteLine(color);
+            }
+        }
+
+        Console.WriteLine("\nColors saved successfully!");
+
+        Console.WriteLine("\nReading colors from file:");
+        using (StreamReader reader = new StreamReader(fileName))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+        }
+    }
+}
+*/
+
+
+/*   QUESTION 10
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task DownloadFileAsync()
+    {
+        Console.WriteLine("Downloading file...");
+        await Task.Delay(5000); 
+        Console.WriteLine("Download complete!");
+    }
+
+    static async Task Main(string[] args)
+    {
+        await DownloadFileAsync();
+    }
+}
+*/
 
